@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>老虎机模拟器 · 再访笔记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f2f6f9;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #1a2b3c;
+            line-height: 1.7;
+            padding: 2rem 1rem 3rem;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 40px 40px 32px 32px;
+            box-shadow: 0 10px 30px rgba(0, 40, 60, 0.08);
+            overflow: hidden;
+            padding: 2rem 1.8rem 2.8rem;
+        }
+
+        /* 蓝绿点缀 */
+        .accent-block {
+            background: linear-gradient(145deg, #c3e8e2 0%, #d4efea 100%);
+            border-radius: 32px;
+            padding: 1.6rem 2rem;
+            margin-bottom: 2.2rem;
+        }
+
+        .hero-emoji {
+            font-size: 2.6rem;
+            display: inline-block;
+            margin-bottom: 0.2rem;
+        }
+
+        .hero-title {
+            font-size: 1.9rem;
+            font-weight: 550;
+            letter-spacing: -0.02em;
+            color: #0a2c2a;
+            margin-top: 0.1rem;
+            line-height: 1.2;
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: #1f4a47;
+            background: rgba(255, 255, 255, 0.5);
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            margin-top: 0.7rem;
+            backdrop-filter: blur(2px);
+        }
+
+        .tagline {
+            font-size: 1.08rem;
+            color: #2d4d4a;
+            background: #ebf7f4;
+            padding: 0.7rem 1.4rem;
+            border-radius: 60px;
+            display: inline-block;
+            margin: 1.8rem 0 1rem;
+            font-weight: 480;
+        }
+
+        p {
+            margin-bottom: 1.4rem;
+        }
+
+        a {
+            color: #1a7a6e;
+            text-decoration: none;
+            border-bottom: 1.5px solid #b8ddd6;
+            transition: border-color 0.2s, background 0.2s;
+            font-weight: 480;
+        }
+
+        a:hover, a:focus {
+            border-bottom-color: #0b5e54;
+            background: #e3f3ef;
+            border-radius: 4px;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+            margin: 2rem 0 1.8rem;
+        }
+
+        .card {
+            background: #f8fcfb;
+            border-radius: 28px;
+            padding: 1.6rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(30, 70, 70, 0.04);
+            border: 1px solid #def0ec;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(30, 80, 80, 0.08);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 540;
+            color: #10433e;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .card p {
+            margin-bottom: 0.2rem;
+            font-size: 0.98rem;
+            color: #1d3f3b;
+        }
+
+        .card .meta-note {
+            font-size: 0.9rem;
+            color: #4a716b;
+            background: #e3f1ed;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 0.3rem;
+        }
+
+        .faq-mini {
+            background: #ecf5f2;
+            padding: 1.6rem 1.8rem;
+            border-radius: 32px;
+            margin: 2rem 0 1rem;
+        }
+
+        .faq-mini summary {
+            font-weight: 540;
+            font-size: 1.1rem;
+            color: #0d3632;
+            cursor: pointer;
+            padding: 0.2rem 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.8rem;
+        }
+
+        .faq-mini details[open] summary {
+            color: #0a5249;
+        }
+
+        .faq-mini .answer {
+            margin: 0.6rem 0 0.2rem 1.8rem;
+            color: #1b443f;
+            font-size: 0.98rem;
+        }
+
+        .closing-note {
+            border-top: 1px solid #d5e6e2;
+            padding-top: 2rem;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .closing-note p {
+            margin-bottom: 0.2rem;
+            color: #2f5b56;
+        }
+
+        .bookmark-reminder {
+            background: #cde9e3;
+            padding: 0.5rem 1.4rem;
+            border-radius: 60px;
+            font-size: 0.95rem;
+            color: #0a3f39;
+        }
+
+        @media (min-width: 680px) {
+            .page {
+                padding: 2.8rem 3rem 3rem;
+            }
+            .grid-cards {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.6rem;
+            }
+            .hero-title {
+                font-size: 2.3rem;
+            }
+            .card {
+                padding: 1.8rem 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem 0.6rem;
+            }
+            .page {
+                padding: 1.6rem 1rem 2rem;
+                border-radius: 28px;
+            }
+            .hero-title {
+                font-size: 1.6rem;
+            }
+            .accent-block {
+                padding: 1.2rem 1.2rem;
+            }
+            .faq-mini {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="accent-block">
+            <div class="hero-emoji">🎲</div>
+            <h1 class="hero-title">又一次回到这里</h1>
+            <div class="hero-sub">老虎机模拟器 · 翻阅与收藏</div>
+        </div>
+
+        <p>如果你曾经打开过这个页面，或者只是隐约记得一个名字——那么这次停留或许有些不一样。没有闪烁的诱导，没有夸张的承诺，只有一种安静的实用感：一个专注于模拟与练习的<span style="border-bottom: 2px solid #b0d9d0;">工具型页面</span>，它叫 <a href="https://m-slotsimulator.com">老虎机模拟器</a>。</p>
+
+        <p>很多人第一次来是为了熟悉规则，或是测试某种策略的手感。但真正让人愿意把它加入书签的，往往是它<strong>稳定、干脆、不消耗注意力</strong>的气质。不用注册，没有弹窗，加载后就能直接开始。这种“用完即走，想回就回”的体验，在今天的网页里反而成了稀缺品。</p>
+
+        <div class="tagline">✦ 为什么值得再次打开</div>
+
+        <div class="grid-cards">
+            <div class="card">
+                <h3>🔄 模拟节奏，自己控制</h3>
+                <p>每次旋转的反馈清晰稳定，你可以随时暂停、调整或重新开始。没有倒计时压力，也没有积分焦虑。适合用来观察、记录或单纯放松手指。</p>
+                <span class="meta-note">适合短时练习</span>
+            </div>
+            <div class="card">
+                <h3>📌 界面干净，入口明确</h3>
+                <p>整个工具围绕模拟展开，没有多余跳转。即使是电脑与手机交替使用，布局也不会错乱。<a href="https://m-slotsimulator.com">老虎机模拟器</a> 的主功能始终一目了然。</p>
+                <span class="meta-note">移动端适配良好</span>
+            </div>
+            <div class="card">
+                <h3>📚 收藏后随时回来</h3>
+                <p>添加书签或加入主屏幕后，它就成了一个随身模拟工具。不需要每次重新搜索，也不需要担心版本变动——它始终是那个样子。</p>
+                <span class="meta-note">稳定迭代</span>
+            </div>
+            <div class="card">
+                <h3>🧩 低门槛，多场景</h3>
+                <p>无论是想快速了解老虎机的运作逻辑，还是在休息间隙随手试两把，它都不需要你付出任何认知成本。打开即用，关闭即忘。</p>
+                <span class="meta-note">零学习曲线</span>
+            </div>
+        </div>
+
+        <div class="faq-mini">
+            <details>
+                <summary>📖 这个模拟器适合哪些场景？</summary>
+                <div class="answer">
+                    适合想熟悉老虎机回合流程、测试简单下注思路、或者在碎片时间里进行低干扰模拟的用户。不适合追求真实货币回报或即时奖励感的人群。
+                </div>
+            </details>
+            <details>
+                <summary>🔖 如何快速保存以便下次访问？</summary>
+                <div class="answer">
+                    在浏览器地址栏右侧点击书签按钮（或使用 Ctrl+D / Cmd+D）即可。移动端可以添加到主屏幕，下次直接点开图标进入 <a href="https://m-slotsimulator.com">老虎机模拟器</a>。
+                </div>
+            </details>
+            <details>
+                <summary>⚙️ 页面会频繁更新吗？</summary>
+                <div class="answer">
+                    功能层面的更新有计划但不会很密集，每次调整都会保持向后兼容。收藏后偶尔回来看一眼，通常还是熟悉的样子，或许会有小优化。
+                </div>
+            </details>
+        </div>
+
+        <div class="closing-note">
+            <p><span style="font-size: 1.2rem;">🔁</span> 一次访问是好奇，再次访问是习惯。</p>
+            <div class="bookmark-reminder">◂ 如果觉得顺手，不妨加个书签</div>
+        </div>
+
+        <p style="margin-top: 1.2rem; font-size: 0.93rem; color: #4d6f6a; border-left: 3px solid #b7d8d0; padding-left: 1rem;">
+            本页介绍的是同一款工具：<a href="https://m-slotsimulator.com">老虎机模拟器</a>。保持简单，保持可用。感谢你的再次阅读。
+        </p>
+    </div>
+</body>
+</html>
